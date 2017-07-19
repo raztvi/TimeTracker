@@ -9820,6 +9820,23 @@ jQuery.noConflict = function( deep ) {
 	return jQuery;
 };
 
+jQuery('#datetimepicker').periodpicker({
+    norange: true, // use only one value
+    cells: [1, 1], // show only one month
+
+    resizeButton: false, // deny resize picker
+    fullsizeButton: false,
+    fullsizeOnDblClick: false,
+
+    timepicker: true, // use timepicker
+    timepickerOptions: {
+        hours: true,
+        minutes: true,
+        seconds: false,
+        ampm: true
+    }
+});
+
 // Expose jQuery and $ identifiers, even in AMD
 // (#7102#comment:10, https://github.com/jquery/jquery/pull/557)
 // and CommonJS for browser emulators (#13566)
