@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label asp-for="StartDate" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
-                        <input asp-for="StartDate" class="form-control" />
+                        <input asp-for="StartDate" class="date form-control" id="StartDate" type="text" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -45,6 +45,20 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label asp-for="ClientName" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ClientName" class="form-control" />
+                        <span asp-validation-for="ClientName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClientAdress" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="ClientAdress" class="form-control" />
+                        <span asp-validation-for="ClientAdress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="Create" class="btn btn-default" />
                     </div>
@@ -53,31 +67,23 @@
         </form>
 
     </div>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
-    <script src="~/lib/moment/moment.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/moment/moment.js"></script>
+  
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <script src="~/lib/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
-    
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $(function () {
-                $('#StartDate').datetimepicker({
-                    format: 'years'
-
-                });
-
-
-            });
-
+        $(document).ready(function ()
+        {
+            datetimepicker($('#StartDate'), {});
+           
         });
-            
-      
 
 
     </script>

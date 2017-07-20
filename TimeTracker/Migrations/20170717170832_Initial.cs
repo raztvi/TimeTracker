@@ -18,7 +18,9 @@ namespace TimeTracker.Migrations
                     EndDate = table.Column<DateTime>(nullable: false),
                     ProjectName = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    TaskName = table.Column<string>(nullable: true)
+                    TaskName = table.Column<string>(nullable: true),
+                    ClientName = table.Column<string>(nullable: true),
+                    ClientAdress = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

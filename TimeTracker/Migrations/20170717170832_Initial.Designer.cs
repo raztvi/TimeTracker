@@ -30,6 +30,10 @@ namespace TimeTracker.Migrations
 
                     b.Property<string>("TaskName");
 
+                    b.Property<string>("ClientName");
+
+                    b.Property<string>("ClientAdress");
+
                     b.HasKey("ID");
 
                     b.ToTable("CreateProjectModel");

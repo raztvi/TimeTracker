@@ -20,5 +20,9 @@ namespace TimeTracker.Models
         [Display(Name = "End Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
+        [Display(Name = "Client Name")]
+        public string ClientName { get; set; }
+        [Display(Name = "Client Adress")]
+        public string ClientAdress { get; set; }
     }
 }

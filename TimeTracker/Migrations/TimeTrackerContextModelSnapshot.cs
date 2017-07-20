@@ -21,9 +21,14 @@ namespace TimeTracker.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ClientAdress");
+
+                    b.Property<string>("ClientName");
+
                     b.Property<DateTime>("EndDate");
 
-                    b.Property<string>("ProjectName");
+                    b.Property<string>("ProjectName")
+                        .IsRequired();
 
                     b.Property<DateTime>("StartDate");
 

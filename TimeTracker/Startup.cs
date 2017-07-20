@@ -58,7 +58,7 @@ namespace TimeTracker
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=CreateProject}/{action=Index}/{id?}");
             });
         }
     }
