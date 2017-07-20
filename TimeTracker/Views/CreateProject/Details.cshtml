@@ -45,6 +45,12 @@
         <dd>
             @Html.DisplayFor(model => model.ClientAdress)
         </dd>
+        <dt>
+        Duration
+        </dt>
+        <dd>
+            @Model.EndDate.Subtract(Model.StartDate).TotalHours hours
+        </dd>
     </dl>
 </div>
 <div>

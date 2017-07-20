@@ -19,8 +19,14 @@ namespace TimeTracker.Controllers
         }
 
         // GET: CreateProject
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index( DateTime start, DateTime end )
         {
+            var hours = (start - end).TotalHours;
+
+            var model = new CreateProjectModel
+            {
+                 
+            }
             return View(await _context.CreateProjectModel.ToListAsync());
         }
 
