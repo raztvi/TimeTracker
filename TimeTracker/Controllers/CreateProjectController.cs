@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
 using TimeTracker.Models;
 
 namespace TimeTracker.Controllers
@@ -19,14 +20,9 @@ namespace TimeTracker.Controllers
         }
 
         // GET: CreateProject
-        public async Task<IActionResult> Index( DateTime start, DateTime end )
+        public async Task<IActionResult> Index()
         {
-            var hours = (start - end).TotalHours;
-
-            var model = new CreateProjectModel
-            {
-                 
-            }
+            
             return View(await _context.CreateProjectModel.ToListAsync());
         }
 
@@ -54,20 +50,55 @@ namespace TimeTracker.Controllers
             return View();
         }
 
-        // POST: CreateProject/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST CreateProject/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,ProjectName,TaskName,StartDate,EndDate,ClientName,ClientAdress")] CreateProjectModel createProjectModel)
         {
-            if (ModelState.IsValid)
+            bool valid = true;
+            if(DateTime.Compare(createProjectModel.StartDate,createProjectModel.EndDate)>0)
+            {
+                ModelState.AddModelError("", "Start Date cannot be greater than End Date");
+                valid = false;
+            }
+            if (ModelState.IsValid && valid)
             {
                 _context.Add(createProjectModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(createProjectModel);
+        }
+
+
+        public IActionResult Invoice()
+        {
+            List<CreateProjectModel> invoiceList = new List<CreateProjectModel>();
+
+            invoiceList = (from product in _context.CreateProjectModel select product).ToList();
+            invoiceList.Insert(0, new CreateProjectModel { ID = 0, ProjectName = "Select" });
+            ViewBag.ListofInvoice = invoiceList;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Invoice(CreateProjectModel Invoice)
+        {
+            if (Invoice.ID ==0)
+            {
+                ModelState.AddModelError("", "Please select a project");
+            }
+            var SelectValue = Invoice.ID;
+            ViewBag.SelectedValue = Invoice.ID;
+
+            List<CreateProjectModel> invoiceList = new List<CreateProjectModel>();
+
+            invoiceList = (from product in _context.CreateProjectModel select product).ToList();
+
+            invoiceList.Insert(0, new CreateProjectModel { ID = 0, ProjectName = "Select" });
+            ViewBag.ListofInvoice = invoiceList;
+
+            return View();
         }
 
         // GET: CreateProject/Edit/5
@@ -87,8 +118,6 @@ namespace TimeTracker.Controllers
         }
 
         // POST: CreateProject/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,ProjectName,TaskName,StartDate,EndDate,ClientName,ClientAdress")] CreateProjectModel createProjectModel)
@@ -98,7 +127,14 @@ namespace TimeTracker.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            bool valid = true;
+            if (DateTime.Compare(createProjectModel.StartDate, createProjectModel.EndDate) > 0)
+            {
+                ModelState.AddModelError("", "Start Date cannot be greater than End Date");
+                valid = false;
+            }
+
+            if (ModelState.IsValid && valid)
             {
                 try
                 {
@@ -150,9 +186,13 @@ namespace TimeTracker.Controllers
             return RedirectToAction("Index");
         }
 
+        
+
         private bool CreateProjectModelExists(int id)
         {
             return _context.CreateProjectModel.Any(e => e.ID == id);
         }
+
+        
     }
 }

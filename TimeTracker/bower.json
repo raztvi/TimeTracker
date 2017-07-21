@@ -3,13 +3,16 @@
   "private": true,
   "dependencies": {
     "bootstrap": "v4.0.0-alpha.6",
-    "jquery-validation": "1.14.0",
+    "jquery-validation": "1.16.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "eonasdan-bootstrap-datetimepicker": "bootstrap-datetimepicker-3#v4.17.45",
-    "jquery": "jQuery#2.1.1"
+    "jquery": "3.2.1",
+    "bootstrap-datepicker": "v1.7.1"
   },
   "resolutions": {
     "bootstrap": "v4.0.0-alpha.6",
-    "jquery": ">=1.9.1"
+    "jquery": "3.2.1",
+    "bootstrap-datepicker": "v1.7.1",
+    "jquery-validation": "1.16.0"
   }
 }

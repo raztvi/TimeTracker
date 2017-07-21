@@ -8,7 +8,7 @@ namespace TimeTracker.Models
 {
     public class TimeTrackerContext : DbContext
     {
-        public TimeTrackerContext (DbContextOptions<TimeTrackerContext> options)
+        public TimeTrackerContext (DbContextOptions<TimeTrackerContext> options )
             : base(options)
         {
         }
